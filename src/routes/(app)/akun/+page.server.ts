@@ -13,7 +13,6 @@ export const load = (async () => {
 
 export const actions = {
     create: async ({ request }) => {
-        await new Promise(r => setTimeout(r, 3000))
         const form = await parceZod(request, akunSchema)
         if (form.error) return fail(form.error.status, form.error)
 
@@ -25,8 +24,6 @@ export const actions = {
     },
 
     update: async ({ request }) => {
-        await new Promise(r => setTimeout(r, 3000))
-
         const form = await parceZod(request, akunSchema.merge(idSchema))
         if (form.error) return fail(form.error.status, form.error)
 
@@ -38,8 +35,6 @@ export const actions = {
     },
 
     delete: async ({ url }) => {
-        await new Promise(r => setTimeout(r, 3000))
-
         const id = url.searchParams.getAll('id')
         if (!id) return fail(400, { message: "Id is required !" })
 
@@ -47,6 +42,6 @@ export const actions = {
         if (!res.success) {
             return fail(res.error.status ?? 400, { ...res.error })
         }
-        return { id }
+        return { data: res.result }
     },
 } satisfies Actions

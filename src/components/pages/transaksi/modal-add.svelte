@@ -17,6 +17,11 @@
 	let isOpen = $state<boolean>(false);
 	let error = $state<TypeZodError<typeof transaksiCreateSchema>>();
 
+	function closeModal() {
+		error = undefined;
+		isOpen = false;
+	}
+
 	const title = 'Buat transaksi baru';
 	const callback: CallbackSubmit<{ data: Transaksi[] }, typeof transaksiCreateSchema> = {
 		loading: (val) => {
@@ -46,14 +51,16 @@
 	>
 		<h1 class="text-2xl font-medium">Buat Transaksi Baru</h1>
 
-		<FlashMessage message={error?.message} />
+		{#if error}
+			<FlashMessage {error} />
+		{/if}
 
 		<FieldForm errors={error?.errors} />
 
 		<footer class="grid gap-2">
 			<Button icon="send" type="submit">Buat</Button>
 			<Button icon="square" color="yellow" type="reset">Reset</Button>
-			<Button onclick={() => (isOpen = false)} icon="arrow-left" color="red">Batal</Button>
+			<Button onclick={closeModal} icon="arrow-left" color="red">Batal</Button>
 		</footer>
 	</form>
 </Modal>

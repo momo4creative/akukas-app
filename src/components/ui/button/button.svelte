@@ -30,10 +30,12 @@
 		'relative rounded font-medium tracking-wide',
 		'inline-flex min-h-9 items-center px-3',
 		'text-white',
+		'outline-2 outline-offset-2',
+		'focus:outline',
 		{
-			'bg-blue-700': color == 'blue',
-			'bg-yellow-600': color == 'yellow',
-			'bg-red-700': color == 'red'
+			'bg-blue-700 outline-blue-700': color == 'blue',
+			'bg-yellow-600 outline-yellow-700': color == 'yellow',
+			'bg-red-700 outline-red-700': color == 'red'
 		},
 		props.class
 	)}

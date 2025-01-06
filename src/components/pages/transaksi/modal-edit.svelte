@@ -16,6 +16,11 @@
 	}
 	let { values, open = $bindable(), onSuccess }: Props = $props();
 
+	function closeModal() {
+		error = undefined;
+		open = false;
+	}
+
 	let error = $state<TypeZodError<typeof transaksiUpdateSchema>>();
 	const title = 'Ubah transaksi';
 	const callback: CallbackSubmit<{ data: Transaksi[] }> = {
@@ -44,7 +49,9 @@
 	>
 		<h1 class="text-2xl font-medium">Ubah Transaksi</h1>
 
-		<FlashMessage message={error?.message} />
+		{#if error}
+			<FlashMessage {error} />
+		{/if}
 
 		<FieldForm errors={error?.errors} {values} />
 
