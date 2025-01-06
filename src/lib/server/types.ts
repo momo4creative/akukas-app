@@ -22,7 +22,7 @@ type DbFilter<T = Record<string, any>> = {
     _sort?: Partial<Record<keyof T, 'asc' | 'desc'>>
     _order?: [number, number]
     _date?: {
-        name?: keyof T
+        name: keyof T
         date?: string | Date
         month?: number
         year?: number
