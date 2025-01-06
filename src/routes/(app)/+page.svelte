@@ -2,8 +2,6 @@
 	import ListSummaryAkun from '@pages/beranda/list-summary-akun.svelte';
 	import type { PageData } from './$types';
 	import { akunState } from '$lib/share/summary.svelte';
-	import LoadingData from '@ui/loading/loading-data.svelte';
-	import FlashMessage from '@ui/message/flash-message.svelte';
 	import LoadAndMessage from '@pages/layout/load-and-message.svelte';
 
 	let { data }: { data: PageData } = $props();
@@ -20,7 +18,14 @@
 	<hr class="my-4 border-gray-700" />
 
 	<ListSummaryAkun
-		title="Kas Lain"
-		values={akunState.result?.data.filter((d) => !d.kode.toString().startsWith('5'))}
+		title="Kas"
+		values={akunState.result?.data.filter((d) => d.kode.toString().startsWith('1'))}
+	/>
+
+	<hr class="my-4 border-gray-700" />
+
+	<ListSummaryAkun
+		title="Modal"
+		values={akunState.result?.data.filter((d) => d.kode.toString().startsWith('3'))}
 	/>
 {/if}
