@@ -41,7 +41,9 @@
 >
 	<h1 class="text-center text-4xl font-bold tracking-wider">{isLogin ? 'Login' : 'Register'}</h1>
 
-	<FlashMessage message={error?.message} />
+	{#if error}
+		<FlashMessage {error} />
+	{/if}
 
 	<div class="grid gap-2">
 		<Input
