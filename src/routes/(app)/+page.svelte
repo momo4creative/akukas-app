@@ -4,12 +4,12 @@
 	import { akunState } from '$lib/share/summary.svelte';
 	import LoadingData from '@ui/loading/loading-data.svelte';
 	import FlashMessage from '@ui/message/flash-message.svelte';
+	import LoadAndMessage from '@pages/layout/load-and-message.svelte';
 
 	let { data }: { data: PageData } = $props();
 </script>
 
-<LoadingData loading={akunState.loading} />
-<FlashMessage error={akunState.error} />
+<LoadAndMessage loading={akunState.loading} error={akunState.error} />
 
 {#if akunState.result?.data}
 	<ListSummaryAkun
