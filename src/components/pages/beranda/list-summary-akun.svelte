@@ -42,10 +42,14 @@
 	{#each values ?? [] as v, i (v.id)}
 		<li animate:flip in:fade={{ delay: i * 200 }} out:fly={{ x: 50 }} class="bg-gray-900 px-4 py-2">
 			<h1 class="text-xl font-medium">{v.kode} - {v.uraian}</h1>
-			<div class="text-gray-300">
-				<span>{formatNumberToRupiah(v.nilai ?? 0)}</span>
-				<span>/</span>
-				<span>{formatNumberToRupiah(v.batas ?? 0)}</span>
+			<div class="text-gray-400">
+				<span class={cn({ 'text-red-500': v.nilai <= 0 })}
+					>{formatNumberToRupiah(v.nilai ?? 0)}</span
+				>
+				{#if v.batas}
+					<span>/</span>
+					<span>{formatNumberToRupiah(v.batas)}</span>
+				{/if}
 			</div>
 
 			<button
