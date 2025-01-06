@@ -2,12 +2,11 @@
 	import List from '@pages/transaksi/list.svelte';
 	import type { PageData } from './$types';
 	import ModalEdit from '@pages/transaksi/modal-edit.svelte';
-	import ModalDelete from '@pages/transaksi/modal-delete.svelte';
+	import ModalDelete from '@pages/layout/modal-delete.svelte';
 	import ModalAdd from '@pages/transaksi/modal-add.svelte';
 	import { invalidate } from '$app/navigation';
 	import { transaksiState } from '$lib/share/summary.svelte';
-	import FlashMessage from '@ui/message/flash-message.svelte';
-	import LoadingData from '@ui/loading/loading-data.svelte';
+	import LoadAndMessage from '@pages/layout/load-and-message.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -34,8 +33,7 @@
 	<ModalAdd onSuccess={() => invalidate('app:layout')} />
 </header>
 
-<LoadingData loading={transaksiState.loading} />
-<FlashMessage message={transaksiState.error?.message} success={!!transaksiState.error} />
+<LoadAndMessage loading={transaksiState.loading} error={transaksiState.error} />
 
 {#if transaksiState.result?.data}
 	<List
@@ -47,6 +45,7 @@
 
 <ModalDelete
 	bind:open={isDelete.value}
+	title="Hapus transaksi"
 	action="/transaksi?/delete&id={isDelete.data?.[0].id}&id={isDelete.data?.[1].id}"
 	onSuccess={() => invalidate('app:layout')}
 />

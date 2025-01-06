@@ -2,8 +2,8 @@ import { z } from "zod";
 import { idSchema } from "./id";
 
 export const transaksiCreateSchema = z.object({
-    akun_id0: z.string().uuid(),
-    akun_id1: z.string().uuid(),
+    akun_id0: z.string().uuid("Silakan pilih !"),
+    akun_id1: z.string().uuid("Silakan pilih !"),
     tanggal: z.string().pipe(z.coerce.date()),
     kode: z.string().min(1, 'Wajib diisi !').trim(),
     uraian: z.string().min(1, 'Wajib diisi !').trim(),

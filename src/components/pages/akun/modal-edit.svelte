@@ -16,6 +16,11 @@
 	}
 	let { values, open = $bindable(), onSuccess }: Props = $props();
 
+	function closeModal() {
+		error = undefined;
+		open = false;
+	}
+
 	let error = $state<TypeZodError<typeof akunSchema>>();
 	const title = 'ubah akun';
 	const callback: CallbackSubmit<Akun> = {
@@ -44,14 +49,16 @@
 	>
 		<h1 class="text-2xl font-medium">Ubah Akun</h1>
 
-		<FlashMessage message={error?.message} />
+		{#if error}
+			<FlashMessage {error} />
+		{/if}
 
 		<FieldForm errors={error?.errors} {values} />
 
 		<footer class="grid gap-2">
 			<Button icon="send" type="submit">Ubah</Button>
 			<Button icon="square" color="yellow" type="reset">Reset</Button>
-			<Button onclick={() => (open = false)} icon="arrow-left" color="red">Batal</Button>
+			<Button onclick={closeModal} icon="arrow-left" color="red">Batal</Button>
 		</footer>
 	</form>
 </Modal>

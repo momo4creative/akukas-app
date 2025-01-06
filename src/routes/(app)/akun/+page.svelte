@@ -2,14 +2,14 @@
 	import ModalAdd from '@pages/akun/modal-add.svelte';
 	import List from '@pages/akun/list.svelte';
 	import ModalEdit from '@pages/akun/modal-edit.svelte';
-	import ConfirmDelete from '@pages/layout/confirm-delete.svelte';
 	import { invalidate } from '$app/navigation';
 	import { akunState } from '$lib/share/summary.svelte';
 	import LoadingData from '@ui/loading/loading-data.svelte';
 	import FlashMessage from '@ui/message/flash-message.svelte';
-	// import type { PageData } from './$types';
+	import ModalDelete from '@pages/layout/modal-delete.svelte';
+	import type { PageData } from './$types';
 
-	// let { data }: { data: PageData } = $props();
+	let { data }: { data: PageData } = $props();
 
 	let isEdit = $state<{ value: boolean; data?: Akun }>({ value: false });
 	let isDelete = $state<{ value: boolean; data?: Akun }>({ value: false });
@@ -21,7 +21,9 @@
 </header>
 
 <LoadingData loading={akunState.loading} />
-<FlashMessage message={akunState.error?.message} success={!!akunState.error} />
+{#if akunState.error}
+	<FlashMessage message={akunState.error?.message} />
+{/if}
 
 {#if akunState.result?.data}
 	<List
@@ -31,8 +33,9 @@
 	/>
 {/if}
 
-<ConfirmDelete
+<ModalDelete
 	bind:open={isDelete.value}
+	title="Hapus akun"
 	action="/akun?/delete&id={isDelete.data?.id}"
 	onSuccess={() => invalidate('app:layout')}
 />

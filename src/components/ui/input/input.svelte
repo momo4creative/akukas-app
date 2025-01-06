@@ -2,6 +2,7 @@
 	import Icon from '@iconify/svelte';
 	import cn from '$lib/utils/cn';
 	import type { HTMLInputAttributes } from 'svelte/elements';
+	import MsgError from './msg-error.svelte';
 
 	interface Props extends HTMLInputAttributes {
 		label: string;
@@ -21,11 +22,18 @@
 			type="text"
 			bind:value
 			{...props}
+			oninput={() => (errors = undefined)}
 			spellcheck="false"
-			class={cn('rounded', 'block min-h-9 w-full px-2', 'bg-slate-700', {
-				'ps-8': !!icon
-			})}
+			class={cn(
+				'rounded',
+				'block min-h-9 w-full px-2',
+				'bg-gray-800',
+				'focus:outline focus:outline-offset-2 focus:outline-blue-700',
+				{
+					'ps-8': !!icon
+				}
+			)}
 		/>
 	</div>
-	<div class="text-red-500">{errors}</div>
+	<MsgError {errors} />
 </label>

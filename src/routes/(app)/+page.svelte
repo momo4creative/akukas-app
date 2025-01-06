@@ -6,8 +6,6 @@
 	import FlashMessage from '@ui/message/flash-message.svelte';
 
 	let { data }: { data: PageData } = $props();
-
-	$inspect(akunState);
 </script>
 
 <LoadingData loading={akunState.loading} />

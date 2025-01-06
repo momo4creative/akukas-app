@@ -11,7 +11,7 @@
 	let {}: Props = $props();
 </script>
 
-<ul class="fixed inset-x-0 top-0 flex flex-col items-center px-4">
+<ul class="fixed inset-x-0 top-0 z-50 flex flex-col items-center px-4">
 	{#each $toast as { type, message, id }, i (id)}
 		<li
 			animate:flip
