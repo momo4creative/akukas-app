@@ -1,6 +1,5 @@
 import { PRIVATE_GS_URL } from "$env/static/private"
 import type { TypeZodError } from "$lib/schema/parce-zod"
-import { error } from "@sveltejs/kit"
 import { App } from "./App"
 import { Auth } from "./Auth"
 
