@@ -26,8 +26,8 @@
 	});
 </script>
 
-<Nav class="m-2" />
+<Nav class="my-2 px-4" />
 
-<Profile name={data.user?.username} class="m-2" />
+<Profile name={data.user?.username} class="my-2 px-4" />
 
 {@render children()}

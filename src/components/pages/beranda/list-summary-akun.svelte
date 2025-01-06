@@ -36,11 +36,11 @@
 	</ul>
 {/snippet}
 
-<h1 class="mx-4 my-2 text-2xl font-medium text-gray-400">{title}</h1>
+<h1 class="my-2 px-4 text-2xl font-medium text-gray-400">{title}</h1>
 
-<ul class="space-y-0.5">
+<ul class="grid gap-0.5">
 	{#each values ?? [] as v, i (v.id)}
-		<li animate:flip in:fade={{ delay: i * 200 }} out:fly={{ x: 50 }} class="bg-gray-900 px-4 py-2">
+		<li animate:flip in:fade={{ delay: i * 200 }} out:fly={{ y: 50 }} class="bg-gray-900 px-4 py-2">
 			<h1 class="text-xl font-medium">{v.kode} - {v.uraian}</h1>
 			<div class="text-gray-400">
 				<span class={cn({ 'text-red-500': v.nilai <= 0 })}
@@ -52,19 +52,21 @@
 				{/if}
 			</div>
 
-			<button
-				onclick={() => handleClickDropdownTransaksi(i)}
-				type="button"
-				class="absolute -mt-2 flex w-full justify-center rounded-full"
-			>
-				<span
-					class={cn('rounded-full border border-black bg-slate-800 p-1 transition-transform', {
-						'rotate-180': openTransaksi == i
-					})}
+			<div class="relative mt-4">
+				<button
+					onclick={() => handleClickDropdownTransaksi(i)}
+					type="button"
+					class="absolute inset-x-0 -mt-2 flex justify-center"
 				>
-					<Icon icon="mdi:chevron-down" />
-				</span>
-			</button>
+					<span
+						class={cn('rounded-full border border-black bg-slate-800 p-1 transition-transform', {
+							'rotate-180': openTransaksi == i
+						})}
+					>
+						<Icon icon="mdi:chevron-down" />
+					</span>
+				</button>
+			</div>
 
 			{#if openTransaksi == i}
 				{@render transaksi(v.transaksi)}
