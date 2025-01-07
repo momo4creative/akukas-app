@@ -6,7 +6,7 @@
 	import type { transaksiCreateSchema } from '$lib/schema/transaksi';
 	import Select from '@ui/input/select.svelte';
 	import { formatDateInput } from '$lib/utils/format';
-	import { akunState, transaksiState } from '$lib/share/summary.svelte';
+	import { akunState, countTransaksi, transaksiState } from '$lib/share/summary.svelte';
 
 	interface Props extends HTMLBaseAttributes {
 		errors?: TypeZodError<typeof transaksiCreateSchema>['errors'];
@@ -15,9 +15,8 @@
 	let { values, errors }: Props = $props();
 
 	let tanggal = $state(formatDateInput(values?.[0].tanggal ?? new Date()));
-	let noUrutTransaksi = $derived(!transaksiState.result ? 1 : transaksiState.result.count / 2 + 1);
 	const kode = $derived(
-		'T' + Number(tanggal.toString().replaceAll('-', '')) * 1000 + noUrutTransaksi
+		'T' + Number(tanggal.toString().replaceAll('-', '')) * 1000 + countTransaksi.value / 2
 	);
 
 	const optionsAkun = $derived(

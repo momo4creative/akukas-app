@@ -7,6 +7,7 @@
 	import { invalidate } from '$app/navigation';
 	import { transaksiState } from '$lib/share/summary.svelte';
 	import LoadAndMessage from '@pages/layout/load-and-message.svelte';
+	import Button from '@ui/button/button.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -30,7 +31,12 @@
 
 <header class="m-4 flex justify-between">
 	<h1 class="text-4xl">Transaksi</h1>
-	<ModalAdd onSuccess={() => invalidate('app:layout')} />
+
+	<ModalAdd onSuccess={() => invalidate('app:layout')}>
+		{#snippet snippetChild(openModal)}
+			<Button onclick={openModal} icon="plus-thick">Buat</Button>
+		{/snippet}
+	</ModalAdd>
 </header>
 
 <LoadAndMessage loading={transaksiState.loading} error={transaksiState.error} />

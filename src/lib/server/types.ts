@@ -7,6 +7,7 @@ type DbParameters = {
     update?: boolean
     delete?: boolean
     summary?: boolean
+    count?: boolean
 
     table?: DbTable
     body?: Record<string, any>[]
