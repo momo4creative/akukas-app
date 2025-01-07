@@ -3,9 +3,19 @@
 	import type { PageData } from './$types';
 	import { akunState } from '$lib/share/summary.svelte';
 	import LoadAndMessage from '@pages/layout/load-and-message.svelte';
+	import ModalAdd from '@pages/transaksi/modal-add.svelte';
+	import Button from '@ui/button/button.svelte';
 
 	let { data }: { data: PageData } = $props();
 </script>
+
+<ModalAdd>
+	{#snippet snippetChild(openModal)}
+		<div class="px-4">
+			<Button onclick={openModal} icon="plus-thick" class="w-full">Transaksi Baru</Button>
+		</div>
+	{/snippet}
+</ModalAdd>
 
 <LoadAndMessage loading={akunState.loading} error={akunState.error} />
 

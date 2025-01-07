@@ -3,7 +3,7 @@
 	import type { LayoutData } from './$types';
 	import Nav from '@pages/layout/nav.svelte';
 	import Profile from '@pages/layout/profile.svelte';
-	import { akunState } from '$lib/share/summary.svelte';
+	import { akunState, countTransaksi } from '$lib/share/summary.svelte';
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
@@ -23,6 +23,10 @@
 			.catch((e) => {
 				akunState.error = e;
 			});
+
+		data.promise_count_transaksi.then((res) => {
+			if (res.success) countTransaksi.value = res.result;
+		});
 	});
 </script>
 

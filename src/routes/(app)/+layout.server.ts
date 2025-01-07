@@ -32,6 +32,8 @@ export const load = (async ({ locals: { user }, depends, url }) => {
             akun: {
                 _select: ['kode', 'uraian']
             }
-        })
+        }),
+
+        promise_count_transaksi: db.transaksi.count()
     };
 }) satisfies LayoutServerLoad;

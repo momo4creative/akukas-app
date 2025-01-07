@@ -11,3 +11,5 @@ export const transaksiState: {
     error?: TypeZodError
     result?: DbRead<SummaryTransaksi[]>
 } = $state({})
+
+export const countTransaksi: { value: number } = $state({ value: 0 })

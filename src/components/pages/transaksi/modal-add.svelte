@@ -8,11 +8,14 @@
 	import FlashMessage from '@ui/message/flash-message.svelte';
 	import type { TypeZodError } from '$lib/schema/parce-zod';
 	import type { transaksiCreateSchema } from '$lib/schema/transaksi';
+	import type { Snippet } from 'svelte';
+	import { invalidate } from '$app/navigation';
 
 	interface Props extends HTMLBaseAttributes {
 		onSuccess?: (arg: Transaksi[]) => void;
+		snippetChild: Snippet<[() => void]>;
 	}
-	let { onSuccess }: Props = $props();
+	let { onSuccess, snippetChild }: Props = $props();
 
 	let isOpen = $state<boolean>(false);
 	let error = $state<TypeZodError<typeof transaksiCreateSchema>>();
@@ -26,7 +29,9 @@
 	const callback: CallbackSubmit<{ data: Transaksi[] }, typeof transaksiCreateSchema> = {
 		loading: (val) => {
 			if (val) {
-				isOpen = false;
+				setTimeout(() => {
+					isOpen = false;
+				}, 1000);
 			}
 		},
 		result: (val) => {
@@ -35,12 +40,13 @@
 				isOpen = true;
 				return;
 			}
-			onSuccess?.(val.data.data);
+			if (onSuccess) return onSuccess(val.data.data);
+			invalidate('app:layout');
 		}
 	};
 </script>
 
-<Button onclick={() => (isOpen = true)} icon="plus-thick">Buat</Button>
+{@render snippetChild(() => (isOpen = true))}
 
 <Modal bind:open={isOpen}>
 	<form
