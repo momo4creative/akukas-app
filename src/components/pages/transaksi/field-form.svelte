@@ -16,7 +16,7 @@
 
 	let tanggal = $state(formatDateInput(values?.[0].tanggal ?? new Date()));
 	const kode = $derived(
-		'T' + Number(tanggal.toString().replaceAll('-', '')) * 1000 + countTransaksi.value / 2
+		'T' + Number(tanggal.toString().replaceAll('-', '')) * 1000 + (countTransaksi.value / 2 + 1)
 	);
 
 	const optionsAkun = $derived(
